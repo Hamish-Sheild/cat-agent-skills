@@ -41,7 +41,7 @@ This skill never writes to the workbook. It produces a row for the user to paste
 
 Copilot Cowork reports session cost through the `/cost` command as a single Copilot Credits figure (the older `/usage` command, which gave a token-level breakdown, is no longer available). `/cost` is a UI command the user runs, Cowork cannot run it on the user's behalf, so always ask the user to run it and paste the figure in. Ask for whatever is missing:
 
-- The `/cost` figure, in credits. This is always the total cost of the session. Record it as a plain number with no thousands separators (for example 1259.1, not 1,259.1) so it stays numeric in Excel.
+- The `/cost` figure, in credits. This is always the total cost of the session. Take it exactly as `/cost` printed it, thousands separators and all, and never ask the user to reformat it. Strip the separators yourself when writing the row, so 1,259.1 is recorded as 1259.1 and the cell stays numeric in Excel.
 - Which model actually ran. `/cost` does not report this. If the session ran on Cowork's "auto" model selection, record it as "Auto". If the user has not stated which model ran, always ask, do not guess or leave it unconfirmed.
 - Which effort level the session ran at. `/cost` does not report this either. It is set per task in Cowork next to the model, and the options are Light, Medium, High, Extra High, and Max, with Medium as the default. Effort level has a large effect on credits burned, often larger than the choice of model, so a row without it cannot explain its own cost. If the user has not stated it, always ask, do not assume Medium just because it is the default.
 - The project/skill context and the prompt used.
