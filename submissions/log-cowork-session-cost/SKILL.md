@@ -46,7 +46,7 @@ Copilot Cowork reports session cost through the `/cost` command as a single Copi
 - Which effort level the session ran at. `/cost` does not report this either. It is set per task in Cowork next to the model, and the options are Light, Medium, High, Extra High, and Max, with Medium as the default. Effort level has a large effect on credits burned, often larger than the choice of model, so a row without it cannot explain its own cost. If the user has not stated it, always ask, do not assume Medium just because it is the default.
 - The project/skill context and the prompt used.
 
-**Anonymise the client.** Never name the actual client or organisation anywhere in the entry, the Project/Context line, the quoted prompt, file names, the workbook row, or anywhere else. Replace it with a generic placeholder that still conveys the type of work, for example "[Client] CRM" or "a higher education client's case management project". Do this even if the client name appears in the prompt or a file name as given, redact it rather than carrying it through.
+**Anonymise sensitive details.** Never include client/organisation names or other identifying/confidential details (for example: people names, internal programme/system names, locations, IDs) anywhere in the entry, the Project/Context line, the quoted prompt, file names, the workbook row, or anywhere else. Replace them with a generic placeholder that still conveys the type of work (for example "[Client] CRM" or "a higher education client's case management project").
 
 ## Step 2: Derive the USD cost
 
