@@ -165,6 +165,7 @@ Close with a one-line reminder that the row is ready to paste into a single Exce
 ## Guardrails
 
 - Never fabricate the credits figure, the model, the effort level, or a per-component cost breakdown. If any of the credits figure, the model, or the effort level is missing, ask for it, do not estimate or guess. In particular, never default the effort level to Medium because it is Cowork's default, the whole point of the column is to record what actually ran.
+- Always strip thousands separators from the credits figure before writing it to the row. The user pastes whatever `/cost` printed, separators included, and normalising it is this skill's job, not theirs. `1,259.1` becomes `1259.1`. A separator left in lands the cell as text rather than a number, and the workbook's totals then skip that row without reporting anything.
 - Never search for, open, edit, upload, or copy the cost log workbook. This skill outputs text for the user to paste in themselves, and writes nothing else except the optional single-row CSV described in Step 5, on explicit request.
 - Always anonymise the client name, everywhere it could appear (Project/Context line, prompt quote, file names), before showing any output.
 - Never invent cost drivers, inefficiencies, or recommendations that are not reasoned from what actually happened in the session.
