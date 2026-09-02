@@ -31,9 +31,9 @@ Produce a cost record for a Copilot Cowork session from the `/cost` credits figu
 
 ## Configuration
 
-This skill does not write to the workbook. It produces a copy-paste ready row that you paste into the `Log` sheet of your cost log workbook yourself. Do not search OneDrive or SharePoint for the workbook, and do not open, edit, upload, or copy it.
+This skill never writes to the workbook. It produces a row for the user to paste into the `Log` sheet themselves. Do not search OneDrive or SharePoint for the workbook, and do not open, edit, upload, or copy it.
 
-**Workbook:** a starter workbook is bundled at `assets/cowork-cost-log-template.xlsx`. Its `Log` sheet columns match Step 4 exactly, in the same order, and it ships with 30 formatted rows ready to use. Save your own copy to OneDrive or a team SharePoint site before first use.
+**Workbook:** the user's own copy of the bundled `assets/cowork-cost-log-template.xlsx`, whose `Log` sheet carries the Step 4 columns 1 to 13 in the same order. Setting that copy up is covered in the README and is not part of this run.
 
 **Credits to USD rate:** 0.01 USD per credit, per [Microsoft's Copilot Credits documentation](https://learn.microsoft.com/en-us/microsoft-copilot-studio/requirements-messages-management). Update this line if Microsoft changes the rate.
 
@@ -135,7 +135,9 @@ Apply the anonymisation rule to every cell, not only the chat entry.
 
 ## Step 5: Output the row for copy and paste
 
-This skill does not write to, upload, or copy the workbook. Produce the Step 4 row as a single pipe-delimited text string, columns in the Step 4 order (1 to 13), separated by `|`, with any blank field left genuinely empty between pipes.
+This skill does not write to, upload, or copy the workbook. Produce the Step 4 row as a single pipe-delimited text string, columns in the Step 4 order (1 to 13), separated by `|`.
+
+**The row always has exactly 13 fields and exactly 12 `|` separators.** Field 13, Observation Notes, is always blank, so the string always ends with a `|` and nothing after it. Without that trailing pipe the row splits into 12 columns and the Observation Notes column is never created. Leave any other blank field genuinely empty between its pipes rather than collapsing it. Count the separators before you output the row: 12, every time.
 
 **Output the row as plain text on its own line.** Do not wrap it in a fenced code block, do not indent it, and do not format it as a markdown table. Code blocks do not render reliably in Cowork, and a row inside one is awkward to select and copy.
 
@@ -168,3 +170,4 @@ Close with a one-line reminder that the row is ready to paste into a single Exce
 - Never invent cost drivers, inefficiencies, or recommendations that are not reasoned from what actually happened in the session.
 - Leave the Observation Notes cell blank. Never ask for it or fill it in, it is added by hand, separately.
 - Never wrap the pipe-delimited row in a fenced code block, and never let it start a line with a `|`. Both stop it rendering as a copyable string in Cowork.
+- Never output a row with fewer or more than 12 `|` separators, and never drop the trailing `|` that holds the blank Observation Notes field. A row that does not split into 13 columns is malformed.
